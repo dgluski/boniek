@@ -1,0 +1,27 @@
+from django.http import HttpResponse
+from django.template import loader
+from functions import *
+
+def index(request):
+    return HttpResponse("Ca marche 2")
+
+
+def mmc_form(request):
+  template = loader.get_template('mmc_form.html')
+  return HttpResponse(template.render())
+
+def mmc_result(request) :
+    blue_surname=request.POST.get('blue_surname')
+    blue_name=request.POST.get('blue_name')
+    red_surname=request.POST.get('red_surname')
+    red_name=request.POST.get('red_name')
+    dico_4_template = {}
+    
+
+
+
+    template = loader.get_template('mmc_result.html')
+    dico_4_template = {
+        'blue_surname': value,
+    }
+    return HttpResponse(template.render(dico_4_template, request))
