@@ -19,6 +19,7 @@ def mmc_result(request) :
     dico_4_template["fighter_blue"] = return_all_fighters(blue_surname,blue_name)
     dico_4_template["fighter_red"]  = return_all_fighters(red_surname,red_name)
     diff_combats = abs(dico_4_template["fighter_blue"]["nbr_combats"] - dico_4_template["fighter_red"]["nbr_combats"])
-    dico_4_template["extra"] = {"diff_combats": diff_combats}
+    voting_categories = ["Heavyweight","Light Heavyweight","Featherweight","Bantamweight","Flyweight","Strawweight"]
+    dico_4_template["extra"] = {"diff_combats": diff_combats, "voting_categories": voting_categories}
     template = loader.get_template('mmc_result.html')
     return HttpResponse(template.render(dico_4_template, request))

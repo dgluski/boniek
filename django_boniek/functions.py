@@ -72,7 +72,7 @@ def return_all_fighters(prenom,nom) :
       dico_fighters["categorie"] = "non trouve sur tapology"
       dico_fighters["palmares"] = "non trouve sur tapology"
       dico_fighters["nbr_combats"] = 0
-      dico_fighters["type"] = "indertermine"
+      dico_fighters["type"] = "indetermine"
       dico_fighters["elite"] = "elite 2"
       return(dico_fighters)
 

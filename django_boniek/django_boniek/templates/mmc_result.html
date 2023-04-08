@@ -39,50 +39,48 @@
       <div class="panel panel-success">
         <div class="panel-heading">ETUDE DE L'OPPOSITION</div>
         <div class="panel-body">
-		<B>Reglementation Access à la classe Pro</B> <br>
+		<B>Reglementation Access à la classe Professionnel</B> <br>
 		Le combattant Bleu dispose d'un palmares {{fighter_blue.type }} <br>
 		<!--CAS 1-->{% if fighter_blue.type == "Professionnel" %} Il/Elle est donc deja apte à combattre en professionnel.<br> {% endif %}
 		<!--CAS 2-->{% if fighter_blue.type == "Amateur" and fighter_blue.elite == "elite 2" %} Il/Elle accede à la classe professionnelle en raison de son nombre de combats en amateurs {{fighter_blue.nbr_combats}} <br>{% endif %}
-		<!--CAS 3-->{% if fighter_blue.type == "Amateur" and fighter_blue.elite == "non eligible" %} <p class="text-danger">Il/Elle ne peut pas acceder à la classe professionnelle sans une validation CCP </p><br>{% endif %}
-		<!--CAS 4-->{% if fighter_blue.type == "indetermine" %} <p class="text-danger">Il/Elle ne peut pas acceder à la classe professionnelle sans une validation CCP</p> <br>{% endif %}
+		<!--CAS 3-->{% if fighter_blue.type == "Amateur" and fighter_blue.elite == "non eligible" %} Il/Elle ne peut pas acceder à la classe professionnelle sans une validation CCP <br> <button type="button" class="btn btn-warning">Besoin de CCP</button><br>{% endif %}
+		<!--CAS 4-->{% if fighter_blue.type == "indetermine" %} Il/Elle ne peut pas acceder à la classe professionnelle sans une validation CCP <br><button type="button" class="btn btn-warning">Besoin de CCP</button><br>{% endif %}
 
                 Le combattant Rouge dispose d'un palmares {{fighter_red.type }} <br>
 		<!--CAS 1-->{% if fighter_red.type == "Profesionnel" %} Il/Elle est donc deja apte à combattre en professionnel.<br> {% endif %}
                 <!--CAS 2-->{% if fighter_red.type == "Amateur" and fighter_red.elite == "elite 2" %} Il/Elle accede à la classe professionnelle en raison de son nombre de combats en amateurs {{fighter_red.nbr_combats}} <br>{% endif %}
-                <!--CAS 3-->{% if fighter_red.type == "Amateur" and fighter_red.elite == "non eligible" %} <p class="text-danger">Il/Elle ne peut pas acceder à la classe professionnelle sans une validation CCP </p><br>{% endif %}
-                <!--CAS 4-->{% if fighter_red.type == "indetermine" %} <p class="text-danger">Il ne peut pas acceder à la classe professionnelle sans une validation CCP</p> <br>{% endif %}
+                <!--CAS 3-->{% if fighter_red.type == "Amateur" and fighter_red.elite == "non eligible" %} Il/Elle ne peut pas acceder à la classe professionnelle sans une validation CCP <button type="button" class="btn btn-warning">Besoin de CCP</button><br><br>{% endif %}
+                <!--CAS 4-->{% if fighter_red.type == "indetermine" %} Il ne peut pas acceder à la classe professionnelle sans une validation CCP<br><button type="button" class="btn btn-warning">Besoin de CCP</button><br>{% endif %}
 
 		<B>Reglementation Ecart de combats </B> <br>
           {% if fighter_blue.elite == "elite 2" or fighter_red.elite == "elite 2" or fighter_blue.type == "indetermine" or fighter_red.type == "indetermine"%} L'opposition est soumise à la regle des +/- 4 combats en raison de la precense d'un Elite 2 ou d'un palmares vierge<br>
 
-	        {% if extra.diff_combats > 4 %} <span class="glyphicon glyphicon-warning-sign"></span> <p class="text-danger">Ecart de 4 combats NON RESPECTE  </p><br>
+	        {% if extra.diff_combats > 4 %}  <p class="text-danger">Ecart de 4 combats NON RESPECTE  </p>
 
-         	{% if fighter_blue.categorie == "Heavyweight" or fighter_red.categorie == "Heavyweight" %} Vote  BTO POSSIBLE
-	  	{% elif fighter_blue.categorie == "Light Heavyweight" or fighter_red.categorie == "Light Heavyweight" %} Vote  BTO POSSIBLE
-           	{% elif fighter_blue.categorie == "Featherweight" or fighter_red.categorie == "Featherweight" %} Vote  BTO POSSIBLE 
-      	        {% elif fighter_blue.categorie == "Bantamweight" or fighter_red.categorie == "Bantamweight" %} Vote  BTO POSSIBLE 
-      	        {% elif fighter_blue.categorie == "Flyweight" or fighter_red.categorie == "Flyweight" %} Vote  BTO POSSIBLE 
-		{% elif fighter_blue.categorie == "Strawweight" or fighter_red.categorie == "Strawweight" %} Vote  BTO POSSIBLE {%endif%}
+		{% if fighter_blue.categorie in extra.voting_categories %}L'opposition peut etre soumise au Vote BTO en raison de la categorie de poids du combattant bleu : {{fighter_blue.categorie}} <br> <button type="button" class="btn btn-warning">Vote BTO</button><br>
+		{% elif fighter_red.categorie in extra.voting_categories %}L'opposition peut etre soumise au Vote BTO en raison de la categorie de poids du c
+ombattant bleu : {{fighter_red.categorie}} <br> <button type="button" class="btn btn-warning">Vote BTO</button><br>
+                {% else %} L'opposition ne peut pas etre soumise au vote BTO <br><button type="button" class="btn btn-danger">Avis Defavorable</button><br>{% endif %}
 
-	   {% else %} <p class="text-success"> <span class="glyphicon glyphicon-ok-sign"></span> Ecart de 4 combats respecté</p>{% endif%}
+           {% else %}  Ecart de 4 combats respecté <br><button type="button" class="btn btn-success">Avis favorable</button><br>{% endif%}
             
-	  {% else %} <span class="glyphicon glyphicon-ok-sign"></span> Non soumis à la regle +/- 4 combats{% endif%}
+         {% else %}  Non soumis à la regle +/- 4 combats <br> <button type="button" class="btn btn-success">Avis favorable</button>{% endif%}
           
 
 	</div>
-        <div class="panel-footer"> </div>
+        <div class="panel-footer">Un avis favorable sur l'etude de l'opposition est obligatoire</div>
       </div>
     </div>
   </div>
   <div class="row">
     <div class="col-sm-8">
-      <div class="panel panel-default">
+      <div class="panel panel-warning">
         <div class="panel-heading">ETUDE DES PERIODES DE REPOS</div>
         <div class="panel-body">
-              <B>Periode de repos en cas de KO/TKO</B> <br>
-	      <B>Periode de repos entre deux Combats</B> <br>
+              <B>Periode de repos en cas de KO/TKO:</B> a venir<br>
+	      <B>Periode de repos entre deux Combats:</B> a venir<br>
        </div>
-       <div class="panel-footer"> </div>
+       <div class="panel-footer">Un avis favorable sur les temps de repos est obligatoire</div>
       </div>
     </div>
    </div>
