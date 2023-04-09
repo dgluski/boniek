@@ -39,7 +39,7 @@
       <div class="panel panel-success">
         <div class="panel-heading">ETUDE DE L'OPPOSITION</div>
         <div class="panel-body">
-		<B>Reglementation Access à la classe Professionnel</B> <br>
+		<B>Reglementation Access à la classe Professionnelle</B> <br>
 		Le combattant Bleu dispose d'un palmares {{fighter_blue.type }} <br>
 		<!--CAS 1-->{% if fighter_blue.type == "Professionnel" %} Il/Elle est donc deja apte à combattre en professionnel.<br> {% endif %}
 		<!--CAS 2-->{% if fighter_blue.type == "Amateur" and fighter_blue.elite == "elite 2" %} Il/Elle accede à la classe professionnelle en raison de son nombre de combats en amateurs {{fighter_blue.nbr_combats}} <br>{% endif %}
@@ -77,8 +77,25 @@ ombattant bleu : {{fighter_red.categorie}} <br> <button type="button" class="btn
       <div class="panel panel-warning">
         <div class="panel-heading">ETUDE DES PERIODES DE REPOS</div>
         <div class="panel-body">
-              <B>Periode de repos en cas de KO/TKO:</B> a venir<br>
-	      <B>Periode de repos entre deux Combats:</B> a venir<br>
+	      <B>Date du combat:</B> {{extra.fight_date_form}}<br>
+              <B>Combattant Bleu:</B> <br>
+               Date du dernier combat: {{fighter_blue.last_fight_date}}<br>
+	       Resultat du dernier combat: {{fighter_blue.last_fight_result}}<br>
+	       Date previsionnelle pour le prochain combat : {{fighter_blue.date_for_next_fight}}<br>
+	       Liste des dates de TKO/KO: {{fighter_blue.list_of_KO_date}}<br>
+	      <B>Combattant Rouge:</B><br>
+               Date du dernier combat: {{fighter_red.last_fight_date}}<br>
+               Resultat du dernier combat: {{fighter_red.last_fight_result}}<br>
+               Date previsionnelle pour le prochain combat : {{fighter_red.date_for_next_fight}}<br>
+               Liste des dates de TKO/KO: {{fighter_red.list_of_KO_date}}<br>
+	       <B>Conclusion:</B> <br>
+
+	       {% if extra.fight_date_issue == "issue" %}
+	       <button type=button" class="btn btn-warning">Date a controler</button><br>
+		 L'un des deux combattants ne semble pas respecté son delai de repos
+	       {% else %}
+	       <button type="button" class="btn btn-success">Avis favorable</button><br>
+	       {% endif%}
        </div>
        <div class="panel-footer">Un avis favorable sur les temps de repos est obligatoire</div>
       </div>

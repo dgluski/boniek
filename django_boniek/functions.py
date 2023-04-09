@@ -3,6 +3,8 @@ from urllib.request import urlopen
 from difflib import SequenceMatcher
 import time
 import re
+from datetime import datetime, date, timedelta
+import requests
 
 def clean_name(name):
     name = name.rstrip()
@@ -90,7 +92,10 @@ def return_all_fighters(prenom,nom) :
       dico_fighters["fighter"+find_names(line)[0]+find_names(line)[1]]["nbr_combats"] = palmares_counted["total"]
       dico_fighters["fighter"+find_names(line)[0]+find_names(line)[1]]["type"] = palmares_counted["type"]
       dico_fighters["fighter"+find_names(line)[0]+find_names(line)[1]]["elite"] = palmares_counted["elite"]
+      dico_fighters["fighter"+find_names(line)[0]+find_names(line)[1]]["link_to_details"] = line.split('"')[1]
   closest_fighter = return_closest_fighters(dico_fighters,prenom,nom)
+  dico_with_details = retreive_details(closest_fighter["link_to_details"])
+  closest_fighter.update(dico_with_details)
   return(closest_fighter)
 
 def return_closest_fighters(dico_fighters,prenom,nom) :
@@ -110,4 +115,52 @@ def return_all_fighters_from_list(list_word):
       final_dico_fighters.update(return_all_fighters(word,""))
       time.sleep(30)
   return(final_dico_fighters)
+
+def retreive_details(link):
+  url_tapology_search2 = "https://www.tapology.com"+link
+  dico_fighter_details = {}
+  dico_fighter_details["last_fight_result"] = "unknown"
+  dico_fighter_details["list_of_KO_date"] = []
+  headers = {'User-Agent': 'PostmanRuntime/7.29.2'}
+  response = requests.request("GET", url_tapology_search2, headers=headers, data={})
+  html_text = response.text
+  html_line2 = html_text.splitlines()
+  for idx2, line2 in enumerate(html_line2):
+    if "Last Fight:" in line2 :
+      time_in_string = html_line2[idx2+1].split(">")[1].split("<")[0]
+      if time_in_string != "N/A" :
+        time_in_date = datetime.strptime(time_in_string, "%B %d, %Y")
+      else :
+        time_in_date = datetime.strptime("January,01,0000", "%B,%d,%Y")
+      dico_fighter_details["last_fight_date"] = time_in_date
+  # Check if beginning
+    if "<li data-bout-id" in line2 :
+      i = 1
+      full_result = ""
+      simple_result = line2.split("data-status='")[1].split("'")[0]
+      while "</li>" not in html_line2[idx2+i] :
+          # Take the date
+          if "<div class='date'>" in html_line2[idx2+i] :
+              time_in_string_candidate = html_line2[idx2+i+1].rstrip()
+              if time_in_string_candidate != "N/A" :
+                 time_in_date_candidate = datetime.strptime(time_in_string_candidate, "%Y.%m.%d")
+              else :
+                 time_in_date_candidate = datetime.strptime(time_in_string, "%B %d, %Y")
+          # register if full fight is present
+          if "Bout Page" in html_line2[idx2+i] :
+              full_result = html_line2[idx2+i].split(">")[1].split("<")[0]
+          i=i+1
+      # register in KOTKO List
+      if "Loss" in simple_result and "KO/TKO" in full_result   :
+          dico_fighter_details["list_of_KO_date"].append(time_in_date_candidate)
+      
+      # register is match the last match date
+      if time_in_date_candidate == dico_fighter_details["last_fight_date"] :
+        dico_fighter_details["last_fight_result"] = f"{simple_result} {full_result}"
+  if "KO/TKO" in dico_fighter_details["last_fight_result"] and "Loss" in dico_fighter_details["last_fight_result"] :
+      dico_fighter_details["date_for_next_fight"] = dico_fighter_details["last_fight_date"] + timedelta(days=28)
+  else :
+      dico_fighter_details["date_for_next_fight"] = dico_fighter_details["last_fight_date"] + timedelta(days=21)
+  return(dico_fighter_details)
+
 
