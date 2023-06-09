@@ -26,9 +26,9 @@ def clean_and_count_palmares(string):
         count = count + int(m.group(i))
         i = i + 1
     palmares_counted["total"] = count
-    if count > 9 and palmares_counted["type"] == "Professionel":
+    if count > 5 and palmares_counted["type"] == "Professionel":
         palmares_counted["elite"] = "elite 1"
-    elif count < 10 and palmares_counted["type"] == "Professionel":
+    elif count < 6 and palmares_counted["type"] == "Professionel":
         palmares_counted["elite"] = "elite 2"
     elif count > 5 and palmares_counted["type"] == "Amateur":
         palmares_counted["elite"] = "elite 2"
