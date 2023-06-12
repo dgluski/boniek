@@ -76,6 +76,7 @@ def return_all_fighters(prenom,nom) :
       dico_fighters["nbr_combats"] = 0
       dico_fighters["type"] = "indetermine"
       dico_fighters["elite"] = "elite 2"
+      dico_fighters["date_for_next_fight"] = datetime.now()
       return(dico_fighters)
 
   html_line = html.splitlines()
