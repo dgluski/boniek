@@ -49,11 +49,16 @@
                 Le combattant Rouge dispose d'un palmares {{fighter_red.type }} <br>
 		<!--CAS 1-->{% if fighter_red.type == "Profesionnel" %} Il/Elle est donc deja apte à combattre en professionnel.<br> {% endif %}
                 <!--CAS 2-->{% if fighter_red.type == "Amateur" and fighter_red.elite == "elite 2" %} Il/Elle accede à la classe professionnelle en raison de son nombre de combats en amateurs {{fighter_red.nbr_combats}} <br>{% endif %}
-                <!--CAS 3-->{% if fighter_red.type == "Amateur" and fighter_red.elite == "non eligible" %} Il/Elle ne peut pas acceder à la classe professionnelle sans une validation CCP <button type="button" class="btn btn-warning">Besoin de CCP</button><br><br>{% endif %}
+                <!--CAS 3-->{% if fighter_red.type == "Amateur" and fighter_red.elite == "non eligible" %} Il/Elle ne peut pas acceder à la classe professionnelle sans une validation CCP <br> <button type="button" class="btn btn-warning">Besoin de CCP</button><br><br>{% endif %}
                 <!--CAS 4-->{% if fighter_red.type == "indetermine" %} Il ne peut pas acceder à la classe professionnelle sans une validation CCP<br><button type="button" class="btn btn-warning">Besoin de CCP</button><br>{% endif %}
 
 		<B>Reglementation Ecart de combats </B> <br>
-          {% if fighter_blue.elite == "elite 2" or fighter_red.elite == "elite 2" or fighter_blue.type == "indetermine" or fighter_red.type == "indetermine"%} L'opposition est soumise à la regle des +/- 4 combats en raison de la precense d'un Elite 2 ou d'un palmares vierge<br>
+          {% if fighter_blue.elite == "elite 2" or 
+		fighter_red.elite == "elite 2" or 
+		fighter_blue.type == "indetermine" or 
+		fighter_red.type == "indetermine" or 
+		fighter_blue.elite == "non eligible" or
+		fighter_red.elite == "non eligible" %} L'opposition est soumise à la regle des +/- 4 combats en raison de la precense d'un Elite 2 ou d'un palmares vierge<br>
 
 	        {% if extra.diff_combats > 4 %}  <p class="text-danger">Ecart de 4 combats NON RESPECTE  </p>
 
