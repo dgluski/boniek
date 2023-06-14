@@ -10,7 +10,8 @@
 		<B>PRENOM: </B>{{ fighter_blue.surname }}<br>
 		<B>Type de Palmares: </B>{{ fighter_blue.type }}<br>
 		<B>Palmares: </B>{{ fighter_blue.palmares }}<br>
-		<B>Nbr de combats: </B>{{ fighter_blue.nbr_combats }} <br>
+		<B>Nbr de combats Pro: </B>{{ fighter_blue.nbr_combats_pro }} <br>
+		<B>Nbr de combats Ama: </B>{{ fighter_blue.nbr_combats_ama }} <br>
 		  <B>ELITE: </B>{{ fighter_blue.elite }} <br>
 	  <B>Categorie: </B>{{ fighter_blue.categorie }}<br>
 	</div>
@@ -25,7 +26,8 @@
 		<B>PRENOM: </B>{{ fighter_red.surname }}<br>
 		<B>Type de Palmares: </B>{{ fighter_red.type }}<br>
 		<B>Palmares: </B>{{ fighter_red.palmares }}<br>
-		<B>Nbr de combats : </B>{{ fighter_red.nbr_combats }} <br>
+		<B>Nbr de combats Pro: </B>{{ fighter_red.nbr_combats_pro }} <br>
+		<B>Nbr de combats Ama: </B>{{ fighter_red.nbr_combats_ama }} <br>
 		<B>ELITE: </B>{{ fighter_red.elite }}<br>
 	  <B>Categorie: </B>{{ fighter_red.categorie }}<br>
 
@@ -53,7 +55,7 @@
                 <!--CAS 4-->{% if fighter_red.type == "indetermine" %} Il ne peut pas acceder à la classe professionnelle sans une validation CCP<br><button type="button" class="btn btn-warning">Besoin de CCP</button><br>{% endif %}
 
 		<B>Reglementation Ecart de combats </B> <br>
-          {% if fighter_blue.elite == "elite 2" or fighter_red.elite == "elite 2" or fighter_blue.type == "indetermine" or fighter_red.type == "indetermine"  %} L'opposition est soumise à la regle des +/- 4 combats en raison de la precense d'un Elite 2 ou d'un palmares Pro vierge<br>
+          {% if fighter_blue.elite == "elite 2" or fighter_red.elite == "elite 2" or fighter_blue.type == "indetermine" or fighter_red.type == "indetermine" or fighter_red.elite == "non eligible" or fighter_blue.elite == "non eligible"  %} L'opposition est soumise à la regle des +/- 4 combats en raison de la precense d'un Elite 2 ou d'un palmares Pro vierge<br>
 	        {% if extra.diff_combats > 4 %}  <p class="text-danger">Ecart de 4 combats NON RESPECTE  </p>
 
 		{% if fighter_blue.categorie in extra.voting_categories %}L'opposition peut etre soumise au Vote BTO en raison de la categorie de poids du combattant bleu : {{fighter_blue.categorie}} <br> <button type="button" class="btn btn-warning">Vote BTO</button><br>
