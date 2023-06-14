@@ -53,13 +53,7 @@
                 <!--CAS 4-->{% if fighter_red.type == "indetermine" %} Il ne peut pas acceder à la classe professionnelle sans une validation CCP<br><button type="button" class="btn btn-warning">Besoin de CCP</button><br>{% endif %}
 
 		<B>Reglementation Ecart de combats </B> <br>
-          {% if fighter_blue.elite == "elite 2" or 
-		fighter_red.elite == "elite 2" or 
-		fighter_blue.type == "indetermine" or 
-		fighter_red.type == "indetermine" or 
-		fighter_blue.elite == "non eligible" or
-		fighter_red.elite == "non eligible" %} L'opposition est soumise à la regle des +/- 4 combats en raison de la precense d'un Elite 2 ou d'un palmares Pro vierge<br>
-
+          {% if fighter_blue.elite == "elite 2" or fighter_red.elite == "elite 2" or fighter_blue.type == "indetermine" or fighter_red.type == "indetermine"  %} L'opposition est soumise à la regle des +/- 4 combats en raison de la precense d'un Elite 2 ou d'un palmares Pro vierge<br>
 	        {% if extra.diff_combats > 4 %}  <p class="text-danger">Ecart de 4 combats NON RESPECTE  </p>
 
 		{% if fighter_blue.categorie in extra.voting_categories %}L'opposition peut etre soumise au Vote BTO en raison de la categorie de poids du combattant bleu : {{fighter_blue.categorie}} <br> <button type="button" class="btn btn-warning">Vote BTO</button><br>
