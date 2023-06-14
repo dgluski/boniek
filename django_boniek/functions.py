@@ -25,7 +25,13 @@ def clean_and_count_palmares(string):
     while m.group(i) and i != 6 :
         count = count + int(m.group(i))
         i = i + 1
-    palmares_counted["total"] = count
+    if palmares_counted["type"] = "Amateur" :
+        palmares_counted["ama_total"] = count
+        palmares_counted["pro_total"] = 0
+    else :
+        palmares_counted["ama_total"] = 0
+        palmares_counted["pro_total"] = count
+        
     if count > 4 and palmares_counted["type"] == "Professionel":
         palmares_counted["elite"] = "elite 1"
     elif count < 5 and palmares_counted["type"] == "Professionel":
@@ -73,7 +79,8 @@ def return_all_fighters(prenom,nom) :
       dico_fighters["surname"] = prenom
       dico_fighters["categorie"] = "non trouve sur tapology"
       dico_fighters["palmares"] = "non trouve sur tapology"
-      dico_fighters["nbr_combats"] = 0
+      dico_fighters["nbr_combats_pro"] = 0
+      dico_fighters["nbr_combats_ama"] = 0
       dico_fighters["type"] = "indetermine"
       dico_fighters["elite"] = "elite 2"
       dico_fighters["date_for_next_fight"] = datetime.now()
@@ -90,7 +97,8 @@ def return_all_fighters(prenom,nom) :
       dico_fighters["fighter"+find_names(line)[0]+find_names(line)[1]]["palmares"] = html_line[idx+4].split(">")[1].split("<")[0]
       palmares = html_line[idx+4].split(">")[1].split("<")[0]
       palmares_counted = clean_and_count_palmares(palmares)
-      dico_fighters["fighter"+find_names(line)[0]+find_names(line)[1]]["nbr_combats"] = palmares_counted["total"]
+      dico_fighters["fighter"+find_names(line)[0]+find_names(line)[1]]["nbr_combats_ama"] = palmares_counted["ama_total"]
+      dico_fighters["fighter"+find_names(line)[0]+find_names(line)[1]]["nbr_combats_pro"] = palmares_counted["pro_total"]
       dico_fighters["fighter"+find_names(line)[0]+find_names(line)[1]]["type"] = palmares_counted["type"]
       dico_fighters["fighter"+find_names(line)[0]+find_names(line)[1]]["elite"] = palmares_counted["elite"]
       dico_fighters["fighter"+find_names(line)[0]+find_names(line)[1]]["link_to_details"] = line.split('"')[1]
