@@ -25,7 +25,7 @@ def clean_and_count_palmares(string):
     while m.group(i) and i != 6 :
         count = count + int(m.group(i))
         i = i + 1
-    if palmares_counted["type"] = "Amateur" :
+    if palmares_counted["type"] == "Amateur" :
         palmares_counted["ama_total"] = count
         palmares_counted["pro_total"] = 0
     else :
