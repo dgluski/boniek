@@ -16,13 +16,17 @@ def clean_and_count_palmares(string):
     palmares_counted = {"type":"","total":"", "elite":""}
     re_palmares = re.compile(r'^(A?m?) ?(\d*)-(\d*)-(\d*),? ?(\d*) ?(N?C?)$')
     m = re.match(re_palmares, string)
-    if m is not None and m.group(1) :
+    if m is not None :
+        if m.group(1) :
+          palmares_counted["type"] = "Amateur"
+        else:
+          palmares_counted["type"] = "Professionel"
+    else :
         palmares_counted["type"] = "Amateur"
-    else:
-        palmares_counted["type"] = "Professionel"
     count = 0
     i = 2
-    while m.group(i) and i != 6 :
+    if m is not None :
+      while m.group(i) and i != 6 :
         count = count + int(m.group(i))
         i = i + 1
     if palmares_counted["type"] == "Amateur" :
@@ -41,7 +45,6 @@ def clean_and_count_palmares(string):
     elif count < 6 and palmares_counted["type"] == "Amateur":
         palmares_counted["elite"] = "non eligible"
     return(palmares_counted)
-
 
 def similar(a, b):
     return SequenceMatcher(None, a, b).ratio()
