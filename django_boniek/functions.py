@@ -9,7 +9,9 @@ import requests
 def clean_name(name):
     name = name.rstrip()
     name = name.lstrip()
-    name = name.replace(" ","-")
+    weird_char = [["ï","i"],["î","i"],["é","e"],["è","e"],["ù","u"],["ô","o"]]
+    for special in weird_char:
+      name = name.replace(special[0],special[1])
     return(name)
 
 def clean_and_count_palmares(string):
