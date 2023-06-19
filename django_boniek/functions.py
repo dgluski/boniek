@@ -16,7 +16,7 @@ def clean_and_count_palmares(string):
     palmares_counted = {"type":"","total":"", "elite":""}
     re_palmares = re.compile(r'^(A?m?) ?(\d*)-(\d*)-(\d*),? ?(\d*) ?(N?C?)$')
     m = re.match(re_palmares, string)
-    if m.group(1) :
+    if m is not None and m.group(1) :
         palmares_counted["type"] = "Amateur"
     else:
         palmares_counted["type"] = "Professionel"
