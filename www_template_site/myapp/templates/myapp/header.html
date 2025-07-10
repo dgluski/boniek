@@ -1,6 +1,6 @@
 <html lang="en">
 <head>
-  <title>FMMAF Match Making Checker</title>
+  <title>WWW Template</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -23,6 +23,22 @@
       background-color: #f2f2f2;
       padding: 25px;
     }
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
   </style>
 </head>
 <body>
@@ -35,12 +51,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
-      <a class="navbar-brand" href="#">FMMAF</a>
+      <a class="navbar-brand" href="#">Link 1</a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="http://fight.boniek.net:49080/mmc_form.html">Fight Checker</a></li>
-        <li><a href="#"></a></li>
+        <li class="active"><a href="#">Link_2</a></li>
+        <li class="active"><a href="#">link_3</a></li>
         <li><a href="#"></a></li>
         <li><a href="#"></a></li>
         <li><a href="#"></a></li>
@@ -51,4 +67,4 @@
     </div>
   </div>
 </nav>
-{% block mmc_form %}{% endblock %}
+{% block www_specific %}{% endblock %}
