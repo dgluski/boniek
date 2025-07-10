@@ -1,0 +1,51 @@
+{% extends "header.html" %}
+
+{% block keepass_specific %}
+<form action="/keepass_result.html" method="POST">
+
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Entry</th>
+      <th scope="col">Ressource</th>
+    </tr>
+  </thead>
+  <tbody>
+{% for key, value in contenu.items %}
+    <tr>
+	    <th scope="row">{{key}}</th>
+      <td>{{value.ressource}}</td>
+    </tr>
+{% endfor%}
+  </tbody>
+</table>
+
+<br> 
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="panel panel-primary">
+        <div class="panel-heading">Enter the key and choice</div>
+        <div class="panel-body">
+                  <div class="form-group">
+                  <label for="klusz">Key:</label>
+                  <input type="password" class="form-control" id="klusz" name="klusz" required>
+                  </div>
+                  <div class="form-group">
+                  <label for="entry">Entry:</label>
+                  <input type="text" class="form-control" id="entry" name="entry" required>
+                  </div>
+ 	<button type="submit" class="btn btn-default">Submit</button>
+
+        </div>
+    </div>
+  </div>
+ </div>
+</div><br>
+
+
+
+</body>
+</html>
+{% endblock %}
