@@ -1,6 +1,6 @@
 # Web Application based on Django
 
-**Description**
+**Description**<br><br>
 Application to consult and compare Fighters Tapology palmares<br>
 Final goal is to establish automatically Fighters compatibility<br>
 
