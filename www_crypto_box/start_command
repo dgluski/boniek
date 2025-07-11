@@ -1,5 +1,5 @@
 nmcli connection add type dummy ifname dummy0 ipv4.method manual ipv4.addresses 10.0.0.1/32
-iptables -t nat -I PREROUTING -p tcp -s 82.64.202.42 --dport 49094 -j DNAT --to  10.0.0.1:443
+iptables -t nat -I PREROUTING -p tcp -s 82.64.56.78 --dport 49094 -j DNAT --to  10.0.0.1:443
 iptables -I INPUT -p tcp -d 10.0.0.1 --dport 443 -j ACCEPT
 iptables -I INPUT -m state --state ESTABLISHED -j ACCEPT
 iptables -I INPUT -p tcp --dport 49093 -j ACCEPT
